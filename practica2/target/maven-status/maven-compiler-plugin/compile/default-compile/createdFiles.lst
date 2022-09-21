@@ -1,0 +1,7 @@
+com/mycompany/practica2/JAXRSConfiguration.class
+models/UserService.class
+models/User.class
+com/mycompany/practica2/resources/JavaEE8Resource.class
+servlets/Register.class
+servlets/Menu.class
+servlets/Login.class
