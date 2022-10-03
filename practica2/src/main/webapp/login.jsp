@@ -1,9 +1,3 @@
-<%-- 
-    Document   : login
-    Created on : 19-sep-2022, 15:27:44
-    Author     : alumne
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,8 +8,8 @@
     <body>
         <h1>Login</h1>
         <form 
-            action = "Login" 
-            method = "POST"
+            action="Login" 
+            method="POST"
         >
             <label for="username">username:</label><br>
             <input type="text" id="username" name="username"><br>
@@ -24,6 +18,6 @@
             <input type="submit" value="Submit">
         </form>
         <br>
-        <a href="/practica2/index.jsp">Index</a>
+        <a href="/practica2/userRegister.jsp">Registrarse</a><br>
     </body>
 </html>

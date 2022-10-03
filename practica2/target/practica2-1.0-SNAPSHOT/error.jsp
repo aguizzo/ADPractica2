@@ -1,10 +1,10 @@
-<%-- 
-    Document   : error
-    Created on : 19-sep-2022, 15:27:15
-    Author     : alumne
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="javax.servlet.http.HttpSession"%>
+<%@page import="models.User"%>
+        
+<%
+    User user = (User)session.getAttribute("user"); 
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,6 +13,11 @@
     </head>
     <body>
         <h1>Error!</h1>
-        <a href="/practica2/index.jsp">Menú</a>
+        <%
+            if (user == null)
+                out.println("<a href=\"/practica2\">Inicio</a>");
+            else 
+                out.println("<a href=\"/practica2/menu.jsp\">Menú</a>");
+        %>
     </body>
 </html>

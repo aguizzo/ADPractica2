@@ -12,9 +12,8 @@ package models;
 public class User {
 
     
-    private 
-    String username;
-    String password;
+    private String username;
+    private String password;
     
     public User(){}
     

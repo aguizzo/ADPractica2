@@ -6,9 +6,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Login</h1>
+        <h1>Register</h1>
         <form 
-            action="Login" 
+            action="UserRegister" 
             method="POST"
         >
             <label for="username">username:</label><br>
@@ -18,6 +18,8 @@
             <input type="submit" value="Submit">
         </form>
         <br>
-        <a href="/practica2/userRegister.jsp">Registrarse</a><br>
+        <a href="/practica2">Inicio</a>
     </body>
 </html>
+
+

@@ -1,11 +1,3 @@
-<%-- 
-    Document   : menu
-    Created on : 21-sep-2022, 15:21:47
-    Author     : alumne
---%>
-
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="javax.servlet.http.HttpSession"%>
 <%@page import="models.User"%>
@@ -29,6 +21,13 @@
                 if (user != null)
                     out.println("<h2>Bievenido " + user.getUsername() + "</h2>"); 
             %>
+        </div>
+        <div>
+            <ul>
+                <li><a href="imageRegister.jsp">Registrar imagen</a></li>
+                <li><a href="/practica2/ImageList">Imagenes</a></li>
+                <li><a href="error.jsp">Página de error</a></li>
+            </ul>
         </div>
         <form action="Menu">
             <input type="submit" name="logout" value="Logout"/>
