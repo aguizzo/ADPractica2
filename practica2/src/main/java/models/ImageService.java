@@ -66,7 +66,45 @@ public class ImageService {
         }
     }
     
-      public List<Image> getImageList() 
+    public Image getImage(int id)
+        throws  IOException, SQLException{
+        try {
+            Image im = null;
+            String query;
+            PreparedStatement statement;
+            initConnection();
+
+            query = "select * from images "
+                    + "where id=?";
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            
+            while(rs.next()){
+                String title = rs.getString("title");
+                String description = rs.getString("description");
+                String keywords = rs.getString("keywords");
+                String author = rs.getString("author");
+                String uploader = rs.getString("uploader");
+                String captureDate = rs.getString("capture_date");
+                String storageDate = rs.getString("storage_date");
+                String fileName = rs.getString("filename");
+                
+                im = new Image(title, description, keywords, author,
+                uploader, captureDate, storageDate, fileName);
+                im.setId(id);
+            }
+            return im;
+        }
+        catch(SQLException e) {
+            return null;
+        }
+        finally {
+            closeConnection();
+        }
+    }
+    
+    public List<Image> getImageList() 
             throws  IOException, SQLException {
         try {
             List<Image> list = new ArrayList<>();
