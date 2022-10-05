@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +16,9 @@ public class Login extends HttpServlet {
     
     private final UserService uS = UserService.getInstance();
     
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void loginRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try (PrintWriter out = response.getWriter()) {
+        try {
             User user = new User(request.getParameter("username"),
                     request.getParameter("password"));
             boolean logged = uS.userLogin(user);
@@ -29,11 +28,11 @@ public class Login extends HttpServlet {
             }
             else {
                 HttpSession session = request.getSession();
+                user.encryptPassword();
                 session.setAttribute("user", user);
                 session.setMaxInactiveInterval(3000);
                 response.sendRedirect(request.getContextPath() + "/menu.jsp");
             }
-            
         }
         catch (Exception e) {
             System.err.println(e.getMessage());
@@ -42,20 +41,8 @@ public class Login extends HttpServlet {
     }
    
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        loginRequest(request, response);
     }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }
-
 }

@@ -1,19 +1,9 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="javax.servlet.http.HttpSession"%>
-<%@page import="java.util.List"%>
-<%@page import="models.Image"%>
-<%@page import="models.User"%>
 
-<%  User user = (User)session.getAttribute("user");
-    List<Image> list = null;
-    if (user == null) {
-        response.sendRedirect(request.getContextPath() + "/login.jsp");
-    }
-    else {
-        list = (List<Image>)request.getAttribute("imageList");
-    }
-%>
+<c:if test="${user == null}">
+    <c:redirect url="login.jsp"/> 
+</c:if>
 
 <!DOCTYPE html>
 <html>
@@ -22,21 +12,17 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <% for(Image im : list) { %>
-        <c:url var="link" value="ImageList">
-            <c:param name="ID" value="<%= Integer.toString(im.getId())%>"></c:param>
-        </c:url>
-        
-        <div>
-            <p><%= im.getTitle()%></p><br>
-            <br>
+        <c:forEach items="${imageList}" var="im">
+            <c:url var="link" value="ImageShow">
+                <c:param name="ID" value="${im.id}"></c:param>
+            </c:url>
+            <p>${im.title}</p>
+            <c:if test="${user.username == im.uploader}">
+                <p>Mi imagen</p>
+            </c:if>
             <a href="${link}">
-                <img src="./images/<%= im.getFileName()%>" alt="error">
+                <img src="./images/${im.fileName}" alt="error">
             </a>
-        </div>
-        
-        
-        <% } %>
-        
+        </c:forEach> 
     </body>
 </html>

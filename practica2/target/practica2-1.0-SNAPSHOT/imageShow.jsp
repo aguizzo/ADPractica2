@@ -12,17 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <c:forEach items="${imageList}" var="im">
-            <c:url var="link" value="ImageShow">
-                <c:param name="ID" value="${im.id}"></c:param>
-            </c:url>
-            <p>${im.title}</p>
-            <c:if test="${user.username == im.uploader}">
+        <div>
+           <p>${image.title}</p>
+            <c:if test="${user.username == image.uploader}">
                 <p>Mi imagen</p>
             </c:if>
-            <a href="${link}">
-                <img src="./images/${im.fileName}" alt="error">
-            </a>
-        </c:forEach> 
+            <img src="./images/${image.fileName}" alt="error">
+        </div>
     </body>
 </html>
