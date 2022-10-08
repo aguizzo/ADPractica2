@@ -14,10 +14,15 @@
     <body>
         <div>
            <p>${image.title}</p>
+           <p>Subida por ${image.uploader} en ${image.storageDate}</p>
             <c:if test="${user.username == image.uploader}">
                 <p>Mi imagen</p>
             </c:if>
             <img src="./images/${image.fileName}" alt="error">
+            <p>Descripción: ${image.description}</p>
+            <p>Autor de la imagen: ${image.author}</p>
+            <p>Fecha de captura: ${image.captureDate}</p>
+            <p>Palabras clave: ${image.keywords}</p>
         </div>
     </body>
 </html>
