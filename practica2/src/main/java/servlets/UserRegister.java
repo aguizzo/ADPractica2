@@ -17,7 +17,7 @@ public class UserRegister extends HttpServlet {
 
     private final UserService uS = UserService.getInstance();
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void userRegisterRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Connection connection = null;
@@ -31,33 +31,23 @@ public class UserRegister extends HttpServlet {
                 out.println("<p><a href=\"/practica2\">Inicio</a>");
             }
             else {
-                RequestDispatcher dispatcher = request.
+                /*RequestDispatcher dispatcher = request.
                 getRequestDispatcher("error.jsp");
                 
-                dispatcher.forward(request, response);
-                //response.sendRedirect(request.getContextPath() + "/error.jsp?");
+                dispatcher.forward(request, response);*/
+                response.sendRedirect(request.getContextPath() + "/error.jsp?code=20");
             }
         }
         catch (Exception e) {
             System.err.println(e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/error.jsp");
         }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
+        userRegisterRequest(request, response);
     }
 
 }

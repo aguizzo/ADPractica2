@@ -25,7 +25,7 @@ import models.ImageService;
 public class ImageRegister extends HttpServlet {
     private final ImageService iS = ImageService.getInstance();
     
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void imageRegisterRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
@@ -48,27 +48,20 @@ public class ImageRegister extends HttpServlet {
                 uploader, captureDate, storageDate, fileName);
             boolean registered = iS.imageRegister(image);
             if (registered) {
-                out.println("<p>" + "success" + "<br>");
+                out.println("<h1>Imagen registrada con éxito</h1>");
+                out.println("<p><a href=\"/practica2/menu.jsp\">Menú</a>");
             }
             else {
-                out.println("<p>" + "failure" + "<br>");
+                response.sendRedirect(request.getContextPath() + "/error.jsp");
             }
-            out.println("<p>" + image.getTitle() + "<br>");
-            out.println("<p>" + image.getDescription()+ "<br>");
-            out.println("<p>" + image.getKeywords() + "<br>");
-            
-            out.println("<p>" + image.getAuthor() + "<br>");
-            out.println("<p>" + image.getUploader() + "<br>");
-            out.println("<p>" + image.getCaptureDate() + "<br>");
-            
-            out.println("<p>" + image.getStorageDate() + "<br>");
-            out.println("<p>" + image.getFileName() + "<br>");
           }
-          
-          
+          else {
+              response.sendRedirect(request.getContextPath() + "/error.jsp");
+          }     
         } 
         catch (Exception e) {
             e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/error.jsp");
         }
     }
 
@@ -120,12 +113,7 @@ public class ImageRegister extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
+        imageRegisterRequest(request, response);
     }
 
 }

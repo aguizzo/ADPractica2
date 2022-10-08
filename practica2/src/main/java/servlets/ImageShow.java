@@ -1,43 +1,44 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import models.Image;
 import models.ImageService;
 
-@WebServlet(name = "ImageList", urlPatterns = {"/ImageList"})
-public class ImageList extends HttpServlet {
+
+@WebServlet(name = "ImageShow", urlPatterns = {"/ImageShow"})
+public class ImageShow extends HttpServlet {
     
     private final ImageService iS = ImageService.getInstance();
-    
-    @Override
+   
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        getImageListRequest(request, response);
+        getImageRequest(request, response);
     }
     
-    protected void getImageListRequest(HttpServletRequest request, HttpServletResponse response)
-        throws IOException, ServletException {
+    protected void getImageRequest(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
         try {
             RequestDispatcher dispatcher = null;
-            List<Image> list = iS.getImageList();
-            if (list != null) {
-                 request.setAttribute("imageList", list);   
+            String idParam = request.getParameter("ID");
+            int id  = Integer.parseInt(idParam); 
+            Image im = iS.getImage(id);
+            if (im != null) {
+                 request.setAttribute("image", im);   
                  dispatcher = request.
-                     getRequestDispatcher("imageList.jsp");           
+                     getRequestDispatcher("imageShow.jsp");           
                  dispatcher.forward(request, response);
             }   
             else {
-                dispatcher = request.
-                     getRequestDispatcher("error.jsp");           
-                 dispatcher.forward(request, response);
+                int errorCode = 20;
+                request.setAttribute("code", errorCode);
+                response.sendRedirect(request.getContextPath() +
+                    "/error.jsp?code=20");
             }
         }
         catch (Exception e) {
@@ -45,5 +46,5 @@ public class ImageList extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/error.jsp");
         } 
     }
-      
+
 }

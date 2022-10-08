@@ -1,42 +1,43 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="javax.servlet.http.HttpSession"%>
-<%@page import="java.util.List"%>
-<%@page import="models.Image"%>
-<%@page import="models.User"%>
 
-<%  User user = (User)session.getAttribute("user");
-    List<Image> list = null;
-    if (user == null) {
-        response.sendRedirect(request.getContextPath() + "/login.jsp");
-    }
-    else {
-        list = (List<Image>)request.getAttribute("imageList");
-    }
-%>
+<c:if test="${user == null}">
+    <c:redirect url="login.jsp"/> 
+</c:if>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <script src="./scripts/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="./css/styles.css">
     </head>
     <body>
-        <% for(Image im : list) { %>
-        <c:url var="link" value="ImageList">
-            <c:param name="ID" value="<%= Integer.toString(im.getId())%>"></c:param>
-        </c:url>
-        
-        <div>
-            <p><%= im.getTitle()%></p><br>
-            <br>
-            <a href="${link}">
-                <img src="./images/<%= im.getFileName()%>" alt="error">
-            </a>
-        </div>
-        
-        
-        <% } %>
-        
+        <h1>Lista de Imágenes</h1>
+        <c:forEach items="${imageList}" var="im">
+            <c:url var="link" value="ImageShow">
+                <c:param name="ID" value="${im.id}"></c:param>
+            </c:url>
+            <div class="container border mt-3">
+                <h3>${im.title}</h3>
+                <div class="d-flex p-3">
+                    <a href="${link}">
+                        <img src="./images/${im.fileName}" alt="error"
+                             class="flex-shrink-0 me-3 border rounded-circle Imlist"
+                        >
+                    </a>
+                    <div>
+                        <h4>Subida por: ${im.uploader}</h4>
+                        <small>${im.storageDate}</small>
+                         <c:if test="${user.username == im.uploader}">
+                            <p>Mi imagen</p>
+                        </c:if>
+                    </div>
+                </div>
+            </div>
+        </c:forEach> 
     </body>
 </html>

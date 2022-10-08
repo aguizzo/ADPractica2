@@ -1,7 +1,7 @@
 package models;
 
-import models.User;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,27 +21,30 @@ public class UserService {
         return instance;
     }
     //Comprueba si el usuario está en la base de datos
-    public boolean userLogin(User user) 
-            throws  IOException, SQLException {
+    public User userLogin(String username, String password) 
+            throws  IOException, SQLException, NoSuchAlgorithmException{
         try {
             String query;
             PreparedStatement statement;
             initConnection();
-
+            User us = null;
+            
             query = "select * from users " +
                         "where username= ? and password= ?";
             statement = connection.prepareStatement(query);
-            statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword());
+            statement.setString(1, username);
+            statement.setString(2, password);
             ResultSet rs = statement.executeQuery();    
          
             if (!rs.next()) {
-                return false;
+                return us;
             }
-            return true;
+            us = new User(username , password);
+            us.encryptPassword();
+            return us;
         }
-        catch(SQLException e) {
-            return false;
+        catch(Exception e) {
+            return null;
         }
         finally {
             closeConnection();
@@ -66,7 +69,7 @@ public class UserService {
             }
             return true;
         }
-        catch(SQLException e) {
+        catch(Exception e) {
             return false;
         }
         finally {

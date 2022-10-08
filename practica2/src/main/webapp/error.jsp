@@ -3,7 +3,14 @@
 <%@page import="models.User"%>
         
 <%
-    User user = (User)session.getAttribute("user"); 
+    User user = (User)session.getAttribute("user");
+    String param = (String)request.getAttribute("code");
+    int code = 0;
+    if (param != null) {
+        code = Integer.parseInt(param);
+    }
+    
+    String errorMsg = "vacio";
 %>
 <!DOCTYPE html>
 <html>
@@ -14,10 +21,23 @@
     <body>
         <h1>Error!</h1>
         <%
-            if (user == null)
-                out.println("<a href=\"/practica2\">Inicio</a>");
-            else 
-                out.println("<a href=\"/practica2/menu.jsp\">Menú</a>");
+        switch(code) {
+            case 20:
+                errorMsg = "La imagen no existe.";
+                break;
+            default: 
+                errorMsg = "Ha ocurrido algo inesperado.";
+        }
+        if (param == null) {
+            errorMsg = "no params";
+        }
+        %>
+        <p><%= errorMsg %></p> 
+        <%   
+        if (user == null)
+            out.println("<a href=\"/practica2\">Inicio</a>");
+        else 
+            out.println("<a href=\"/practica2/menu.jsp\">Menú</a>");
         %>
     </body>
 </html>
