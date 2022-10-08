@@ -10,19 +10,34 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <script src="./scripts/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="./css/styles.css">
     </head>
     <body>
+        <h1>Lista de Imágenes</h1>
         <c:forEach items="${imageList}" var="im">
             <c:url var="link" value="ImageShow">
                 <c:param name="ID" value="${im.id}"></c:param>
             </c:url>
-            <p>${im.title}</p>
-            <c:if test="${user.username == im.uploader}">
-                <p>Mi imagen</p>
-            </c:if>
-            <a href="${link}">
-                <img src="./images/${im.fileName}" alt="error">
-            </a>
+            <div class="container border mt-3">
+                <h3>${im.title}</h3>
+                <div class="d-flex p-3">
+                    <a href="${link}">
+                        <img src="./images/${im.fileName}" alt="error"
+                             class="flex-shrink-0 me-3 border rounded-circle Imlist"
+                        >
+                    </a>
+                    <div>
+                        <h4>Subida por: ${im.uploader}</h4>
+                        <small>${im.storageDate}</small>
+                         <c:if test="${user.username == im.uploader}">
+                            <p>Mi imagen</p>
+                        </c:if>
+                    </div>
+                </div>
+            </div>
         </c:forEach> 
     </body>
 </html>

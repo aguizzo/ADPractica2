@@ -19,16 +19,15 @@ public class Login extends HttpServlet {
     protected void loginRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            User user = new User(request.getParameter("username"),
-                    request.getParameter("password"));
-            boolean logged = uS.userLogin(user);
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            User user = uS.userLogin(username, password);
             
-            if (!logged) {
+            if (user == null) {
                 response.sendRedirect(request.getContextPath() + "/error.jsp");
             }
             else {
                 HttpSession session = request.getSession();
-                user.encryptPassword();
                 session.setAttribute("user", user);
                 session.setMaxInactiveInterval(3000);
                 response.sendRedirect(request.getContextPath() + "/menu.jsp");
