@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="javax.servlet.http.HttpSession"%>
 <%@page import="models.User"%>
@@ -19,6 +20,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        ${code}
         <h1>Error!</h1>
         <%
         switch(code) {
@@ -33,11 +35,13 @@
         }
         %>
         <p><%= errorMsg %></p> 
-        <%   
-        if (user == null)
-            out.println("<a href=\"/practica2\">Inicio</a>");
-        else 
-            out.println("<a href=\"/practica2/menu.jsp\">Menú</a>");
-        %>
+        <c:choose>
+            <c:when test="${user == null}">
+                <a href="/practica2">Inicio</a>
+            </c:when>
+            <c:otherwise>
+                <a href="/practica2/menu.jsp">Menú</a>
+            </c:otherwise>
+        </c:choose>
     </body>
 </html>
