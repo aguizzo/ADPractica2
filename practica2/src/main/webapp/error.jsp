@@ -4,13 +4,11 @@
 <%@page import="models.User"%>
         
 <%
-    User user = (User)session.getAttribute("user");
     String param = (String)request.getAttribute("code");
     int code = 0;
     if (param != null) {
         code = Integer.parseInt(param);
     }
-    
     String errorMsg = "vacio";
 %>
 <!DOCTYPE html>

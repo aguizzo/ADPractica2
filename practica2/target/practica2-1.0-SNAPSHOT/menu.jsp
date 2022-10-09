@@ -19,7 +19,8 @@
         <div>
             <ul>
                 <li><a href="imageRegister.jsp">Registrar imagen</a></li>
-                <li><a href="/practica2/ImageList">Imagenes</a></li>
+                <li><a href="/practica2/ImageList">Imágenes</a></li>
+                <li><a href="/practica2/imageSearch.jsp">Buscar imágenes</a></li>
                 <li><a href="error.jsp">Página de error</a></li>
             </ul>
         </div>

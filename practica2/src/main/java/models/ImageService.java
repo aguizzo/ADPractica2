@@ -143,6 +143,47 @@ public class ImageService {
         }
     }
     
+        public List<Image> searchByTitle(String queryParams) 
+            throws  IOException, SQLException {
+        try {
+            List<Image> list = new ArrayList<>();
+            String query;
+            PreparedStatement statement;
+            initConnection();
+
+            query = "select * from images "
+                    + "where title LIKE ?";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, queryParams);
+            ResultSet rs = statement.executeQuery();
+            
+            while(rs.next()){
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String description = rs.getString("description");
+                String keywords = rs.getString("keywords");
+                String author = rs.getString("author");
+                String uploader = rs.getString("uploader");
+                String captureDate = rs.getString("capture_date");
+                String storageDate = rs.getString("storage_date");
+                String fileName = rs.getString("filename");
+                
+                Image im = new Image(title, description, keywords, author,
+                uploader, captureDate, storageDate, fileName);
+                im.setId(id);
+                
+                list.add(im);
+            }
+            return list;
+        }
+        catch(SQLException e) {
+            return null;
+        }
+        finally {
+            closeConnection();
+        }
+    }
+    
     private void initConnection() throws IOException {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");

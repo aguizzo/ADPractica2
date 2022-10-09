@@ -5,6 +5,7 @@ servlets/ImageShow.class
 servlets/ImageRegister.class
 servlets/Login.class
 models/ImageService.class
+servlets/ImageSearch.class
 com/mycompany/practica2/JAXRSConfiguration.class
 models/UserService.class
 models/Image.class
