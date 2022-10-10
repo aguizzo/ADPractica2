@@ -1,8 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,21 +20,13 @@ public class ImageSearch extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try {
             String title = request.getParameter("title");
             List<Image> result = iS.searchByTitle(title);
-            RequestDispatcher dispatcher = null;
-            if (result != null) {
-                 request.setAttribute("imageList", result);   
-                 dispatcher = request.
-                     getRequestDispatcher("imageList.jsp");           
-                 dispatcher.forward(request, response);
-            }   
-            else {
-                dispatcher = request.
-                     getRequestDispatcher("error.jsp");           
-                 dispatcher.forward(request, response);
-            }
+            request.setAttribute("imageList", result);   
+            RequestDispatcher dispatcher = request.
+                getRequestDispatcher("imageList.jsp");           
+            dispatcher.forward(request, response);
         }
         catch (Exception e) {
                 System.err.println(e.getMessage());
@@ -49,11 +39,4 @@ public class ImageSearch extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
 }
