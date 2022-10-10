@@ -1,10 +1,10 @@
 models/User.class
 com/mycompany/practica2/resources/JavaEE8Resource.class
-servlets/Menu.class
 servlets/ImageShow.class
 servlets/ImageRegister.class
 servlets/Login.class
 models/ImageService.class
+servlets/Logout.class
 servlets/ImageSearch.class
 com/mycompany/practica2/JAXRSConfiguration.class
 servlets/Error.class

@@ -24,7 +24,7 @@
                 <li><a href="error.jsp">Página de error</a></li>
             </ul>
         </div>
-        <form action="Menu" method="POST">
+        <form action="Logout" method="POST">
             <input type="submit" name="logout" value="Logout"/>
         </form>
         
