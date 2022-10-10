@@ -64,10 +64,7 @@ public class UserService {
             statement.setString(2, password);
             int result = statement.executeUpdate();   
          
-            if (result == 0) {
-                return false;
-            }
-            return true;
+            return !(result == 0);
         }
         catch(Exception e) {
             return false;

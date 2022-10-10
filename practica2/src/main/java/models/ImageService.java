@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
 import java.io.IOException;
@@ -14,10 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author alumne
- */
+
 public class ImageService {
     private Connection connection;
     private static final ImageService instance = new ImageService();
@@ -52,11 +44,7 @@ public class ImageService {
             statement.setString(8, image.getFileName());
                         
             int result = statement.executeUpdate();   
-         
-            if (result == 0) {
-                return false;
-            }
-            return true;
+            return !(result == 0);
         }
         catch(SQLException e) {
             return false;
