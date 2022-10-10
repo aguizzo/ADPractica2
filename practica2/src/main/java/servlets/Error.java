@@ -48,11 +48,21 @@ public class Error extends HttpServlet {
             code = Integer.parseInt(errorCode);
         }
         switch(code) {
+            case 0:
+                errorMsg = "Ha ocurrido una excepción.";
+                break;
+            case 10:
+                errorMsg = "Ya existe un usuario con ese nombre.";
+                break;
+            case 11:
+                errorMsg = "El nombre de usuario o la contraseña son incorrectos.";
+                break;
             case 20:
                 errorMsg = "La imagen no existe.";
                 break;
             default: 
                 errorMsg = "Ha ocurrido algo inesperado.";
+                break;
         }
         return errorMsg;
     }

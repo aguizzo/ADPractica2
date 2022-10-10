@@ -31,16 +31,14 @@ public class UserRegister extends HttpServlet {
                 out.println("<p><a href=\"/practica2\">Inicio</a>");
             }
             else {
-                /*RequestDispatcher dispatcher = request.
-                getRequestDispatcher("error.jsp");
-                
-                dispatcher.forward(request, response);*/
-                response.sendRedirect(request.getContextPath() + "/error.jsp?code=20");
+                response.sendRedirect(request.getContextPath()
+                        + "/Error?code=10");
             }
         }
         catch (Exception e) {
             System.err.println(e.getMessage());
-            response.sendRedirect(request.getContextPath() + "/error.jsp");
+            response.sendRedirect(request.getContextPath() + 
+                    "/Error?code= 0");
         }
     }
 
