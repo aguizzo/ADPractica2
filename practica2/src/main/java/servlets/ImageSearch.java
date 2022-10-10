@@ -25,10 +25,18 @@ public class ImageSearch extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String title = request.getParameter("title");
             List<Image> result = iS.searchByTitle(title);
+            RequestDispatcher dispatcher = null;
             if (result != null) {
-                int size = result.size();
-                out.println(size);
-            }        
+                 request.setAttribute("imageList", result);   
+                 dispatcher = request.
+                     getRequestDispatcher("imageList.jsp");           
+                 dispatcher.forward(request, response);
+            }   
+            else {
+                dispatcher = request.
+                     getRequestDispatcher("error.jsp");           
+                 dispatcher.forward(request, response);
+            }
         }
         catch (Exception e) {
                 System.err.println(e.getMessage());

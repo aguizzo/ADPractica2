@@ -148,13 +148,14 @@ public class ImageService {
         try {
             List<Image> list = new ArrayList<>();
             String query;
+            queryParams =  queryParams.toLowerCase();
             PreparedStatement statement;
             initConnection();
 
             query = "select * from images "
-                    + "where title LIKE ?";
+                    + "where LOWER(title) LIKE ?";
             statement = connection.prepareStatement(query);
-            statement.setString(1, queryParams);
+            statement.setString(1, "%" + queryParams + "%");
             ResultSet rs = statement.executeQuery();
             
             while(rs.next()){
