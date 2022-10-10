@@ -16,6 +16,9 @@
     </head>
     <body>
         <h1>Lista de Imágenes</h1>
+        <c:if test="${imageList.size() == 0}">
+            <p>No hay imágenes.</p>
+        </c:if>
         <c:forEach items="${imageList}" var="im">
             <c:url var="link" value="ImageShow">
                 <c:param name="ID" value="${im.id}"></c:param>

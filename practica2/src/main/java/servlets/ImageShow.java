@@ -15,11 +15,6 @@ import models.ImageService;
 public class ImageShow extends HttpServlet {
     
     private final ImageService iS = ImageService.getInstance();
-   
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        getImageRequest(request, response);
-    }
     
     protected void getImageRequest(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
@@ -35,16 +30,20 @@ public class ImageShow extends HttpServlet {
                  dispatcher.forward(request, response);
             }   
             else {
-                int errorCode = 20;
-                request.setAttribute("code", errorCode);
-                response.sendRedirect(request.getContextPath() +
-                    "/error.jsp?code=20");
+                response.sendRedirect(request.getContextPath()
+                        + "/Error?code=20");
             }
         }
         catch (Exception e) {
                 System.err.println(e.getMessage());
                 response.sendRedirect(request.getContextPath() + "/error.jsp");
         } 
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        getImageRequest(request, response);
     }
 
 }

@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "Menu", urlPatterns = {"/Menu"})
-public class Menu extends HttpServlet {
+@WebServlet(name = "Logout", urlPatterns = {"/Logout"})
+public class Logout extends HttpServlet {
 
     protected void logoutRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
