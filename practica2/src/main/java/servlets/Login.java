@@ -24,8 +24,7 @@ public class Login extends HttpServlet {
             User user = uS.userLogin(username, password);
             
             if (user == null) {
-                 response.sendRedirect(request.getContextPath()
-                        + "/Error?code=11");
+                 response.sendRedirect("Error?code=11");
             }
             else {
                 HttpSession session = request.getSession();
@@ -36,8 +35,7 @@ public class Login extends HttpServlet {
         }
         catch (Exception e) {
             System.err.println(e.getMessage());
-            response.sendRedirect(request.getContextPath() + 
-                    "/Error?code= 0");
+            response.sendRedirect("Error?code= 0");
         }
     }
    

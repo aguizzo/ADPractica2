@@ -55,10 +55,21 @@ public class Error extends HttpServlet {
                 errorMsg = "Ya existe un usuario con ese nombre.";
                 break;
             case 11:
-                errorMsg = "El nombre de usuario o la contraseña son incorrectos.";
+                errorMsg = "El nombre de usuario o la contraseña "
+                        + "son incorrectos.";
                 break;
             case 20:
                 errorMsg = "La imagen no existe.";
+                break;
+            case 21:
+                errorMsg = "No se ha podido registrar la imagen en "
+                        + "la base de datos.";
+                break;
+            case 22:
+                errorMsg = "No se ha podido guardar la imagen.";
+                break;
+            case 23:
+                errorMsg = "Error en la obtención de imágenes.";
                 break;
             default: 
                 errorMsg = "Ha ocurrido algo inesperado.";

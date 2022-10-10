@@ -30,13 +30,12 @@ public class ImageShow extends HttpServlet {
                  dispatcher.forward(request, response);
             }   
             else {
-                response.sendRedirect(request.getContextPath()
-                        + "/Error?code=20");
+                response.sendRedirect("Error?code=20");
             }
         }
         catch (Exception e) {
                 System.err.println(e.getMessage());
-                response.sendRedirect(request.getContextPath() + "/error.jsp");
+                response.sendRedirect("Error?code= 0");
         } 
     }
     

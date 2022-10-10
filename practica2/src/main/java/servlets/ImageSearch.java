@@ -23,14 +23,15 @@ public class ImageSearch extends HttpServlet {
         try {
             String title = request.getParameter("title");
             List<Image> result = iS.searchByTitle(title);
+            
             request.setAttribute("imageList", result);   
             RequestDispatcher dispatcher = request.
                 getRequestDispatcher("imageList.jsp");           
             dispatcher.forward(request, response);
         }
         catch (Exception e) {
-                System.err.println(e.getMessage());
-                response.sendRedirect(request.getContextPath() + "/error.jsp");
+            System.err.println(e.getMessage());
+            response.sendRedirect("Error?code=23");
         } 
     }
 
