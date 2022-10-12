@@ -74,7 +74,7 @@
                 </div>
                 <input name="ID" value="${param.ID}" hidden>
                 <input class="btn btn-primary"
-                       type="submit" value="Subir imagen">
+                       type="submit" value="Modificar imagen">
             </form>
             <br>
             <a href="/practica2/menu.jsp">Volver al menú</a>
