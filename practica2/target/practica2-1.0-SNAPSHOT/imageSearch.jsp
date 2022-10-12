@@ -20,6 +20,24 @@
             <br>
             <input type="text" id="title" name="title">
             <br>
+            <label for="keywords">
+                Buscar por palabras clave
+            </label
+            <br>
+            <input type="text" id="kewywords" name="keywords">
+            <br>
+            <label for="author">
+                Buscar por autor
+            </label
+            <br>
+            <input type="text" id="author" name="author">
+            <br>
+            <label for="captureDate">
+                Capturada a partir de:
+            </label>
+            <input 
+                   type="date"
+                   name="captureDate">
             <input type="submit" value="Buscar imagen">
         </form>
     </body>

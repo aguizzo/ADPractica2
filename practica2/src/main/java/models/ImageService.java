@@ -131,34 +131,43 @@ public class ImageService {
         }
     }
     
-        public List<Image> searchByTitle(String queryParams) 
+    public List<Image> searchByTitle(String title, String keywords,
+            String author, String captureDate)
             throws  IOException, SQLException {
         try {
             List<Image> list = new ArrayList<>();
             String query;
-            queryParams =  queryParams.toLowerCase();
+            title = title.toLowerCase();
+            keywords = keywords.toLowerCase();
+            author = author.toLowerCase();
             PreparedStatement statement;
             initConnection();
 
-            query = "select * from images "
-                    + "where LOWER(title) LIKE ?";
+            query = "select * from images where ";
+            query += "LOWER(title) LIKE ?";
+            query += " AND LOWER(keywords) LIKE ?";
+            query += " AND LOWER(author) LIKE ?";
+            query += " AND capture_date >= ?";    
             statement = connection.prepareStatement(query);
-            statement.setString(1, "%" + queryParams + "%");
+            statement.setString(1, "%" + title + "%");
+            statement.setString(2, "%" + keywords + "%");
+            statement.setString(3, "%" + author + "%");
+            statement.setString(4, captureDate);
             ResultSet rs = statement.executeQuery();
             
             while(rs.next()){
                 int id = rs.getInt("id");
-                String title = rs.getString("title");
+                String title2 = rs.getString("title");
                 String description = rs.getString("description");
-                String keywords = rs.getString("keywords");
-                String author = rs.getString("author");
+                String keywords2 = rs.getString("keywords");
+                String author2 = rs.getString("author");
                 String uploader = rs.getString("uploader");
-                String captureDate = rs.getString("capture_date");
+                String captureDate2 = rs.getString("capture_date");
                 String storageDate = rs.getString("storage_date");
                 String fileName = rs.getString("filename");
                 
-                Image im = new Image(title, description, keywords, author,
-                uploader, captureDate, storageDate, fileName);
+                Image im = new Image(title2, description, keywords2, author2,
+                uploader, captureDate2, storageDate, fileName);
                 im.setId(id);
                 
                 list.add(im);
