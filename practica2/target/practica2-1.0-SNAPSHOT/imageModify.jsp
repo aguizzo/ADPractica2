@@ -1,9 +1,4 @@
-<%-- 
-    Document   : imageModify
-    Created on : 12-oct-2022, 13:30:21
-    Author     : alumne
---%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <c:if test="${user == null}">

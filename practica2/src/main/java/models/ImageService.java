@@ -53,6 +53,7 @@ public class ImageService {
             closeConnection();
         }
     }
+    
     public boolean deleteImage(int id)
             throws  IOException, SQLException {
         try {
@@ -73,6 +74,7 @@ public class ImageService {
             closeConnection();
         }
     }
+    
     public boolean modifyImage(int id, String title, String description, String keywords, String author, String captureDate)
             throws  IOException, SQLException {
         try {

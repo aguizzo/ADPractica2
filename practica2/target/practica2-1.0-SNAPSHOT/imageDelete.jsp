@@ -1,9 +1,4 @@
-<%-- 
-    Document   : imageDelete
-    Created on : 10-oct-2022, 17:45:11
-    Author     : alumne
---%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <c:if test="${user == null}">

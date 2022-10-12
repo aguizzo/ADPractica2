@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import java.io.IOException;
@@ -16,28 +11,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import models.ImageService;
-/**
- *
- * @author alumne
- */
+
 @WebServlet(name = "ImageModify", urlPatterns = {"/ImageModify"})
 public class ImageModify extends HttpServlet {
+    
     private final ImageService iS = ImageService.getInstance();
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void imageModifyRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-                       
+        try (PrintWriter out = response.getWriter()) {             
             String id = request.getParameter("ID");
             int ID = Integer.parseInt(id);
             String title = request.getParameter("title");
@@ -67,28 +50,10 @@ public class ImageModify extends HttpServlet {
         return simpleDate.format(new Date());
     }
     
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        imageModifyRequest(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }
