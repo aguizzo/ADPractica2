@@ -1,5 +1,6 @@
 models/User.class
 com/mycompany/practica2/resources/JavaEE8Resource.class
+servlets/ImageDelete.class
 servlets/ImageShow.class
 servlets/ImageRegister.class
 servlets/Login.class
@@ -9,6 +10,7 @@ servlets/ImageSearch.class
 com/mycompany/practica2/JAXRSConfiguration.class
 servlets/Error.class
 models/UserService.class
+servlets/ImageModify.class
 models/Image.class
 servlets/ImageList.class
 servlets/UserRegister.class

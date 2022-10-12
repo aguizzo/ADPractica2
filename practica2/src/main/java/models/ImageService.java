@@ -53,6 +53,55 @@ public class ImageService {
             closeConnection();
         }
     }
+    public boolean deleteImage(int id)
+            throws  IOException, SQLException {
+        try {
+            String query;
+            PreparedStatement statement;
+            initConnection();
+
+            query = "delete from IMAGES where ID = ?";
+            statement = connection.prepareStatement(query);    
+            statement.setInt(1,id);            
+            int result = statement.executeUpdate();   
+            return !(result == 0);
+        }
+        catch(SQLException e) {
+            return false;
+        }
+        finally {
+            closeConnection();
+        }
+    }
+    public boolean modifyImage(int id, String title, String description, String keywords, String author, String captureDate)
+            throws  IOException, SQLException {
+        try {
+            String query;
+            PreparedStatement statement;
+            initConnection();
+
+            query = "update IMAGES "
+                    + "set"
+                    + " TITLE = ?, DESCRIPTION = ?, KEYWORDS = ?,"
+                    + " AUTHOR = ?, CAPTURE_DATE = ?"
+                    + "  where ID = ?";
+            statement = connection.prepareStatement(query);    
+            statement.setString(1, title);
+            statement.setString(2, description);
+            statement.setString(3, keywords);
+            statement.setString(4, author);
+            statement.setString(5, captureDate);
+            statement.setInt(6, id);            
+            int result = statement.executeUpdate();   
+            return !(result == 0);
+        }
+        catch(SQLException e) {
+            return false;
+        }
+        finally {
+            closeConnection();
+        }
+    }
     
     public Image getImage(int id)
         throws  IOException, SQLException{
