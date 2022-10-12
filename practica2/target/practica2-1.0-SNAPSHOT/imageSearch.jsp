@@ -9,36 +9,52 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Búsqueda de imágenes</title>
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <script src="./scripts/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="./css/forms.css">
     </head>
     <body>
-        <h1>Búsqueda de imágenes</h1>
-        <form action="ImageSearch" method="GET">
-            <label for="title">
-                Buscar por título
-            </label
+        <div class="login">
+            <h1>Búsqueda de imágenes</h1>
+            <form action="ImageSearch" method="GET">
+                <div class="form-group">
+                    <label class="form-label" for="title">
+                        Buscar por título
+                    </label>
+                    <input class="form-control"
+                           type="text"
+                           name="title">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="keywords">
+                        Buscar por palabras clave
+                    </label>
+                    <input class="form-control"
+                           type="text"
+                           name="keywords">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="author">
+                        Buscar por autor
+                    </label>
+                    <input class="form-control"
+                           type="text"
+                           name="author">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="captureDate">
+                        Capturada a partir de:
+                    </label>
+                    <input class="form-control"
+                           type="date"
+                           name="captureDate">
+                </div>
+                <input class="btn btn-primary"
+                       type="submit" value="Buscar imagen">
+            </form>
             <br>
-            <input type="text" id="title" name="title">
-            <br>
-            <label for="keywords">
-                Buscar por palabras clave
-            </label
-            <br>
-            <input type="text" id="kewywords" name="keywords">
-            <br>
-            <label for="author">
-                Buscar por autor
-            </label
-            <br>
-            <input type="text" id="author" name="author">
-            <br>
-            <label for="captureDate">
-                Capturada a partir de:
-            </label>
-            <input 
-                   type="date"
-                   name="captureDate">
-            <input type="submit" value="Buscar imagen">
-        </form>
+            <a href="/practica2/menu.jsp">Volver al menú</a>
+        </div>
     </body>
 </html>

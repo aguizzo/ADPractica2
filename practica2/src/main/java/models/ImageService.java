@@ -131,7 +131,7 @@ public class ImageService {
         }
     }
     
-    public List<Image> searchByTitle(String title, String keywords,
+    public List<Image> searchImages(String title, String keywords,
             String author, String captureDate)
             throws  IOException, SQLException {
         try {
@@ -143,11 +143,11 @@ public class ImageService {
             PreparedStatement statement;
             initConnection();
 
-            query = "select * from images where ";
-            query += "LOWER(title) LIKE ?";
-            query += " AND LOWER(keywords) LIKE ?";
-            query += " AND LOWER(author) LIKE ?";
-            query += " AND capture_date >= ?";    
+            query = "select * from images where"
+                + " LOWER(title) LIKE ?"
+                + " AND LOWER(keywords) LIKE ?"
+                + " AND LOWER(author) LIKE ?"
+                + " AND capture_date >= ?";    
             statement = connection.prepareStatement(query);
             statement.setString(1, "%" + title + "%");
             statement.setString(2, "%" + keywords + "%");

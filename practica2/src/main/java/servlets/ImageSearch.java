@@ -27,7 +27,7 @@ public class ImageSearch extends HttpServlet {
             String captureDate = request.getParameter("captureDate");
             
             List<Image> result = iS.
-                    searchByTitle(title, keywords, author, captureDate);
+                    searchImages(title, keywords, author, captureDate);
             request.setAttribute("imageList", result);   
             RequestDispatcher dispatcher = request.
                     getRequestDispatcher("imageList.jsp");           
