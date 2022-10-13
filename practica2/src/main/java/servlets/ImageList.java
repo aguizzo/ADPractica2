@@ -28,21 +28,15 @@ public class ImageList extends HttpServlet {
         try {
             RequestDispatcher dispatcher = null;
             List<Image> list = iS.getImageList();
-            if (list != null) {
-                 request.setAttribute("imageList", list);   
-                 dispatcher = request.
-                     getRequestDispatcher("imageList.jsp");           
-                 dispatcher.forward(request, response);
-            }   
-            else {
-                dispatcher = request.
-                     getRequestDispatcher("error.jsp");           
-                 dispatcher.forward(request, response);
-            }
+            
+            request.setAttribute("imageList", list);   
+            dispatcher = request.
+                getRequestDispatcher("imageList.jsp");           
+            dispatcher.forward(request, response);    
         }
         catch (Exception e) {
-                System.err.println(e.getMessage());
-                response.sendRedirect(request.getContextPath() + "/error.jsp");
+            System.err.println(e.getMessage());
+            response.sendRedirect("Error?code=23");
         } 
     }
       

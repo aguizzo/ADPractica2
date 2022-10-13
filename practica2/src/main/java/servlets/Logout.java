@@ -25,7 +25,7 @@ public class Logout extends HttpServlet {
         }
         catch (Exception e) {
             System.err.println(e.getMessage());
-            response.sendRedirect(request.getContextPath() + "/error.jsp");
+            response.sendRedirect("Error?code= 0");
         }
     }
 

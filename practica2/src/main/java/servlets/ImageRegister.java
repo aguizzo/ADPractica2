@@ -52,16 +52,16 @@ public class ImageRegister extends HttpServlet {
                 out.println("<p><a href=\"/practica2/menu.jsp\">Menú</a>");
             }
             else {
-                response.sendRedirect(request.getContextPath() + "/error.jsp");
+                response.sendRedirect("Error?code=21");
             }
           }
           else {
-              response.sendRedirect(request.getContextPath() + "/error.jsp");
+              response.sendRedirect("Error?code=22");
           }     
         } 
         catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/error.jsp");
+            response.sendRedirect("Error?code=0");
         }
     }
 

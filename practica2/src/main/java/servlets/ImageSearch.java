@@ -22,15 +22,20 @@ public class ImageSearch extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             String title = request.getParameter("title");
-            List<Image> result = iS.searchByTitle(title);
+            String keywords = request.getParameter("keywords");
+            String author = request.getParameter("author");
+            String captureDate = request.getParameter("captureDate");
+            
+            List<Image> result = iS.
+                    searchImages(title, keywords, author, captureDate);
             request.setAttribute("imageList", result);   
             RequestDispatcher dispatcher = request.
-                getRequestDispatcher("imageList.jsp");           
+                    getRequestDispatcher("imageList.jsp");           
             dispatcher.forward(request, response);
         }
         catch (Exception e) {
-                System.err.println(e.getMessage());
-                response.sendRedirect(request.getContextPath() + "/error.jsp");
+            System.err.println(e.getMessage());
+            response.sendRedirect("Error?code=23");
         } 
     }
 

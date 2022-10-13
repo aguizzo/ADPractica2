@@ -9,14 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Registro de Imagen</title>
         <link rel="stylesheet" href="./css/bootstrap.min.css">
         <script src="./scripts/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="./css/forms.css">
     </head>
     <body>
         <div class="login">
-        <h1>Registro de Imagen</h1>
+            <h1>Registro de Imagen</h1>
             <form 
                 action="ImageRegister" 
                 method="POST"
