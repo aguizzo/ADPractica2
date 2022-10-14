@@ -51,6 +51,7 @@ public class Error extends HttpServlet {
             case 0:
                 errorMsg = "Ha ocurrido una excepción.";
                 break;
+            // Users errors  
             case 10:
                 errorMsg = "Ya existe un usuario con ese nombre.";
                 break;
@@ -58,6 +59,7 @@ public class Error extends HttpServlet {
                 errorMsg = "El nombre de usuario o la contraseña "
                         + "son incorrectos.";
                 break;
+            // Image errors   
             case 20:
                 errorMsg = "La imagen no existe.";
                 break;
@@ -66,11 +68,22 @@ public class Error extends HttpServlet {
                         + "la base de datos.";
                 break;
             case 22:
-                errorMsg = "No se ha podido guardar la imagen.";
+                errorMsg = "No se ha podido guardar el archivo.";
                 break;
             case 23:
                 errorMsg = "Error en la obtención de imágenes.";
+            case 24:
+                errorMsg = "No se ha podido borrar la imagen en "
+                        + "la base de datos.";
                 break;
+            case 25:
+                errorMsg = "No se ha podido eliminar el archivo.";
+                break;
+            case 26:
+                errorMsg = "No se ha podido modificar la imagen.";    
+            case 403:
+                errorMsg = "Acceso no autorizado.";
+                break;    
             default: 
                 errorMsg = "Ha ocurrido algo inesperado.";
                 break;

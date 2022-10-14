@@ -7,10 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javax.servlet.http.HttpSession;
 
 import models.ImageService;
+import models.User;
 
 @WebServlet(name = "ImageModify", urlPatterns = {"/ImageModify"})
 public class ImageModify extends HttpServlet {
@@ -28,28 +28,30 @@ public class ImageModify extends HttpServlet {
             String keywords = request.getParameter("keywords");
             String author = request.getParameter("author");
             String captureDate = request.getParameter("captureDate");
-                        
-            boolean itworks = iS.modifyImage(ID, title, description, keywords, author, captureDate);
-            if (itworks) {
-                out.println("<h1>Imagen eliminada con éxito</h1>");
-                out.println("<p><a href=\"/practica2/menu.jsp\">Menú</a>");
+            String uploader = request.getParameter("uploader");
+            HttpSession session = request.getSession();
+            User user = (User)session.getAttribute("user");
+            if (user.getUsername().equals(uploader)) {    
+                boolean modified = iS.modifyImage(ID, title, description,
+                    keywords, author, captureDate);
+                if (modified) {
+                    out.println("<h1>Imagen modficada con éxito</h1>");
+                    out.println("<p><a href=\"/practica2/menu.jsp\">Menú</a>");
+                }
+                else {
+                    response.sendRedirect("Error?code=26");
+                }
             }
             else {
-                response.sendRedirect(request.getContextPath() + "/error.jsp");
+                response.sendRedirect("Error?code=403");
             }
         }
         catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/error.jsp");
+            response.sendRedirect("Error?code=0");
         }
     }
 
-    private String getDate() {
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDate = new SimpleDateFormat(pattern);
-        return simpleDate.format(new Date());
-    }
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

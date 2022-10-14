@@ -91,7 +91,6 @@ public class UserService {
             }
         } 
         catch (Exception e) {
-            // connection close failed.
             System.err.println(e.getMessage());
          }
     }

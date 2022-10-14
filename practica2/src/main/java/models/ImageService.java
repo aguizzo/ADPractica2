@@ -75,7 +75,8 @@ public class ImageService {
         }
     }
     
-    public boolean modifyImage(int id, String title, String description, String keywords, String author, String captureDate)
+    public boolean modifyImage(int id, String title, String description,
+            String keywords, String author, String captureDate)
             throws  IOException, SQLException {
         try {
             String query;
@@ -86,7 +87,7 @@ public class ImageService {
                     + "set"
                     + " TITLE = ?, DESCRIPTION = ?, KEYWORDS = ?,"
                     + " AUTHOR = ?, CAPTURE_DATE = ?"
-                    + "  where ID = ?";
+                    + " where ID = ?";
             statement = connection.prepareStatement(query);    
             statement.setString(1, title);
             statement.setString(2, description);
@@ -119,19 +120,8 @@ public class ImageService {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             
-            while(rs.next()){
-                String title = rs.getString("title");
-                String description = rs.getString("description");
-                String keywords = rs.getString("keywords");
-                String author = rs.getString("author");
-                String uploader = rs.getString("uploader");
-                String captureDate = rs.getString("capture_date");
-                String storageDate = rs.getString("storage_date");
-                String fileName = rs.getString("filename");
-                
-                im = new Image(title, description, keywords, author,
-                uploader, captureDate, storageDate, fileName);
-                im.setId(id);
+            if (rs.next()) {
+                im = createImage(rs);
             }
             return im;
         }
@@ -156,20 +146,7 @@ public class ImageService {
             ResultSet rs = statement.executeQuery();
             
             while(rs.next()){
-                int id = rs.getInt("id");
-                String title = rs.getString("title");
-                String description = rs.getString("description");
-                String keywords = rs.getString("keywords");
-                String author = rs.getString("author");
-                String uploader = rs.getString("uploader");
-                String captureDate = rs.getString("capture_date");
-                String storageDate = rs.getString("storage_date");
-                String fileName = rs.getString("filename");
-                
-                Image im = new Image(title, description, keywords, author,
-                uploader, captureDate, storageDate, fileName);
-                im.setId(id);
-                
+                Image im = createImage(rs);
                 list.add(im);
             }
             return list;
@@ -207,20 +184,7 @@ public class ImageService {
             ResultSet rs = statement.executeQuery();
             
             while(rs.next()){
-                int id = rs.getInt("id");
-                String title2 = rs.getString("title");
-                String description = rs.getString("description");
-                String keywords2 = rs.getString("keywords");
-                String author2 = rs.getString("author");
-                String uploader = rs.getString("uploader");
-                String captureDate2 = rs.getString("capture_date");
-                String storageDate = rs.getString("storage_date");
-                String fileName = rs.getString("filename");
-                
-                Image im = new Image(title2, description, keywords2, author2,
-                uploader, captureDate2, storageDate, fileName);
-                im.setId(id);
-                
+                Image im = createImage(rs);
                 list.add(im);
             }
             return list;
@@ -230,6 +194,29 @@ public class ImageService {
         }
         finally {
             closeConnection();
+        }
+    }
+    
+    private Image createImage(ResultSet rs)
+            throws SQLException {
+        try {
+            int id = rs.getInt("id");
+            String title = rs.getString("title");
+            String description = rs.getString("description");
+            String keywords = rs.getString("keywords");
+            String author = rs.getString("author");
+            String uploader = rs.getString("uploader");
+            String captureDate = rs.getString("capture_date");
+            String storageDate = rs.getString("storage_date");
+            String fileName = rs.getString("filename");
+
+            Image im = new Image(title, description, keywords, author,
+                uploader, captureDate, storageDate, fileName);
+            im.setId(id);
+            return im;
+        }
+        catch (SQLException e) {
+            return null;
         }
     }
     
@@ -250,7 +237,6 @@ public class ImageService {
             }
         } 
         catch (Exception e) {
-            // connection close failed.
             System.err.println(e.getMessage());
          }
     }

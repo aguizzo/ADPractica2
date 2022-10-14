@@ -8,52 +8,63 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import models.ImageService;
 import models.Image;
+import models.User;
 
 @WebServlet(name = "ImageDelete", urlPatterns = {"/ImageDelete"})
 public class ImageDelete extends HttpServlet {
     
     private final ImageService iS = ImageService.getInstance();
     
-    protected void deleteImageRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void deleteImageRequest(HttpServletRequest request,HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String id = request.getParameter("ID");
             int ID = Integer.parseInt(id);
-            Image im = iS.getImage(ID);           
-            String fileName = im.getFileName();
-            boolean deleted = deleteFile(fileName);
-            if(deleted){
-                boolean itworks = iS.deleteImage(ID);
-                if (itworks) {
-                    out.println("<h1>Imagen eliminada con éxito</h1>");
-                    out.println("<p><a href=\"/practica2/menu.jsp\">Menú</a>");
+            Image im = iS.getImage(ID); 
+            
+            if (im != null) {
+                String fileName = im.getFileName();
+                HttpSession session = request.getSession();
+                User user = (User)session.getAttribute("user");
+                if (user.getUsername().equals(im.getUploader())) {
+                    boolean deleted = deleteFile(fileName);
+                    if (deleted) {
+                        boolean removed = iS.deleteImage(ID);        
+                        if (removed) {
+                            out.println("<h1>Imagen eliminada con éxito</h1>");
+                            out.println("<p><a href=\"/practica2/menu.jsp\">Menú</a>");
+                        }
+                        else {
+                            response.sendRedirect("Error?code=24");
+                        }
+                    }
+                    else {
+                      response.sendRedirect("Error?code=25");
+                    }   
                 }
                 else {
-                    response.sendRedirect(request.getContextPath() + "/error.jsp");
+                    response.sendRedirect("Error?code=403");
                 }
             }
             else {
-              response.sendRedirect(request.getContextPath() + "/error.jsp");
-            }   
+                response.sendRedirect("Error?code=20");
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/error.jsp");
+            response.sendRedirect("Error?code=0");
         }
     }
     
-     private boolean deleteFile(String fileName)
-            throws IOException {
-        boolean deleted = false;
+    private boolean deleteFile(String fileName) {
         String path = getPath(fileName);
         File image = new File(path);
-        image.delete();
-        deleted = true;
-        return deleted;
+        return image.delete();
     }
      
     private String getPath(String fileName) {
@@ -63,7 +74,6 @@ public class ImageDelete extends HttpServlet {
             + "webapp" + File.separator + "images" + File.separator + fileName;
         return path + relativePath;
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
