@@ -9,10 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Búsqueda de imágenes</title>
+        <title>Imagen ${image.id}</title>
         <link rel="stylesheet" href="./css/bootstrap.min.css">
         <script src="./scripts/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="./css/styles.css">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -47,46 +46,17 @@
             </div>
         </div>
         </nav>
-        <div class="login">
-            <h1>Búsqueda de imágenes</h1>
-            <form action="ImageSearch" method="GET">
-                <div class="form-group">
-                    <label class="form-label" for="title">
-                        Buscar por título
-                    </label>
-                    <input class="form-control"
-                           type="text"
-                           name="title">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="keywords">
-                        Buscar por palabras clave
-                    </label>
-                    <input class="form-control"
-                           type="text"
-                           name="keywords">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="author">
-                        Buscar por autor
-                    </label>
-                    <input class="form-control"
-                           type="text"
-                           name="author">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="captureDate">
-                        Capturada a partir de:
-                    </label>
-                    <input class="form-control"
-                           type="date"
-                           name="captureDate">
-                </div>
-                <input class="btn btn-primary"
-                       type="submit" value="Buscar imagen">
-            </form>
-            <br>
-            <a class="back" href="/practica2/menu.jsp">Volver al menú</a>
+        <div>
+           <p>${image.title}</p>
+           <p>Subida por ${image.uploader} en ${image.storageDate}</p>
+            <c:if test="${user.username == image.uploader}">
+                <p>Mi imagen</p>
+            </c:if>
+            <img src="./images/${image.fileName}" alt="error">
+            <p>Descripción: ${image.description}</p>
+            <p>Autor de la imagen: ${image.author}</p>
+            <p>Fecha de captura: ${image.captureDate}</p>
+            <p>Palabras clave: ${image.keywords}</p>
         </div>
     </body>
 </html>
