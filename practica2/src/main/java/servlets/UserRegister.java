@@ -36,7 +36,7 @@ public class UserRegister extends HttpServlet {
         }
         catch (Exception e) {
             System.err.println(e.getMessage());
-            response.sendRedirect("Error?code= 0");
+            response.sendRedirect("Error?code=0");
         }
     }
 
