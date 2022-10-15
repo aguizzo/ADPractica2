@@ -12,7 +12,7 @@
         <title>Registro de Imagen</title>
         <link rel="stylesheet" href="./css/bootstrap.min.css">
         <script src="./scripts/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="./css/forms.css">
+        <link rel="stylesheet" href="./css/styles.css">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -96,9 +96,12 @@
                            name="captureDate" required>
                 </div>
                 <div class="form-group">
-                <input class="form-control"
-                       type="file"
-                       id="image" name="image" required>
+                    <label class="form-label" for="image">
+                        Selecciona una imagen:
+                    </label>
+                    <input class="form-control"
+                           type="file"
+                           name="image" required>
                 </div>
                 <input class="btn btn-primary"
                        type="submit" value="Subir imagen">

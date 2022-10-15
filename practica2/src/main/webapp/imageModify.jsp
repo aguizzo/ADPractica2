@@ -32,7 +32,7 @@
         <title>Modificar imagen</title>
         <link rel="stylesheet" href="./css/bootstrap.min.css">
         <script src="./scripts/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="./css/forms.css">
+        <link rel="stylesheet" href="./css/styles.css">
     </head>
     <body>
         <div class="login">
