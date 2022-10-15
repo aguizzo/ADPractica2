@@ -35,20 +35,22 @@
     </head>
     <body>
         <h1>¿Quieres eliminar la imagen? </h1>
-        <form 
-                action="ImageDelete" 
-                method="POST"
-         >
-                <input name="ID" value="${param.ID}" hidden>
-                <input class="btn btn-primary"
-                               type="submit" value="Sí">
-        </form>
-        <form 
-                action="menu.jsp" 
-                method="POST"
-         >
-                <input class="btn btn-primary"
-                               type="submit" value="No">
-        </form>
+        <div class="container">
+            <div class="row align-t">
+                <div class="col-md-1">
+                    <form action="ImageDelete" method="POST">
+                        <input name="ID" value="${param.ID}" hidden>
+                        <input class="btn btn-primary"
+                            type="submit" value="Sí">
+                    </form>
+                </div> 
+                <div class="col-md-1">
+                    <form action="menu.jsp" method="POST">
+                        <input class="btn btn-primary"
+                            type="submit" value="No">
+                    </form>
+                </div>  
+            </div>
+        </div>
     </body>
 </html>

@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <h2>Ver Imágenes</h2>
-                    <p>Mira todas las imágenes guardadas por nuestros usuarios</p>
+                    <p>Mira todas las imágenes guardadas por nuestros usuarios.</p>
                     <p><a class="btn btn-primary"
                           href="ImageList">Lista de Imágenes</a>
                     </p>
@@ -66,6 +66,7 @@
                 <div class="col-md-4">
                     <h2>Registrar tus imágenes</h2>
                     <p>Comparte tus imágenes con el resto de usuarios.</p>
+                    <br>
                     <p>
                         <a class="btn btn-primary"
                           href="imageRegister.jsp">Registrar Imagen</a>

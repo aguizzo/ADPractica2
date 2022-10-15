@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="./css/styles.css">
     </head>
     <body>
-        <h1>Error!</h1>
+        <h1>¡Ha ocurrido un error!</h1>
         <p>${Msg}</p> 
         <c:choose>
             <c:when test="${user == null}">
