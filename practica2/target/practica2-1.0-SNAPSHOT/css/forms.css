@@ -1,0 +1,32 @@
+body{
+    display: block;
+}
+
+.login{
+    
+    height: min-content;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.login h1{
+    margin-bottom: 25px;
+}
+
+.login form{
+    width: 360px;
+    font-size: 20px;
+}
+
+.login form .form-group{
+    margin-bottom: 12px;
+}
+
+.login form input[type="submit"]{
+    font-size:20px;
+    margin-top:15px
+}
+.login a{
+    font-weight: bold;
+    font-size: 25px;
+}

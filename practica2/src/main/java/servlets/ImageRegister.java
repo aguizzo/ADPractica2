@@ -50,6 +50,7 @@ public class ImageRegister extends HttpServlet {
             if (registered) {
                 out.println("<h1>Imagen registrada con éxito</h1>");
                 out.println("<p><a href=\"/practica2/menu.jsp\">Menú</a>");
+                out.println("<p><a href=\"/practica2/imageRegister.jsp\">Registrar otra imagen</a>");
             }
             else {
                 response.sendRedirect("Error?code=21");
