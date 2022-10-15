@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="./css/styles.css">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -47,10 +47,15 @@
             </div>
         </div>
         </nav>
-        <h1>Lista de Imágenes</h1>
-        <c:if test="${imageList.size() == 0}">
-            <p>No hay imágenes.</p>
-        </c:if>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-6">Lista de Imágenes</h1>
+                <c:if test="${imageList.size() == 0}">
+                    <p>No hay imágenes.</p>
+                </c:if>
+          </div>
+        </div>
+        
         <c:forEach items="${imageList}" var="im">
             <c:url var="imshow" value="ImageShow">
                 <c:param name="ID" value="${im.id}"></c:param>
@@ -61,14 +66,14 @@
             <c:url var="immod" value="imageModify.jsp">
                 <c:param name="ID" value="${im.id}"></c:param>
             </c:url>
-            <div class="container border mt-3">
+            <div class="container border border-dark mt-3 custombg">
                 <h3>${im.title}</h3>
                 <div class="d-flex p-3">
                     <a href="${imshow}">
                         <img src="./images/${im.fileName}" alt="error"
                             class="flex-shrink-0 me-3 border rounded-circle Imlist"
                         >
-                    </a>
+                    </a>    
                     <div>
                         <h4>
                             Subida por ${im.uploader} en:  ${im.storageDate}

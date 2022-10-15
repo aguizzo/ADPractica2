@@ -35,3 +35,7 @@ body{
     width: 100px;
     height: 100px;
 }
+
+.custombg {
+    background-color: #d0d0d0;
+}

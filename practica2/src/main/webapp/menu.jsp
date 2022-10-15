@@ -14,7 +14,7 @@
         <script src="./scripts/bootstrap.bundle.min.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -46,15 +46,41 @@
             </div>
         </div>
         </nav>
-        <h1>Bienvenido ${user.username}</h1>
-        <div>
-            <ul>
-                <li><a href="imageRegister.jsp">Registrar imagen</a></li>
-                <li><a href="/practica2/ImageList">Imágenes</a></li>
-                <li><a href="/practica2/imageSearch.jsp">Buscar imágenes</a></li>
-                <li><a href="error.jsp">Página de error</a></li>
-            </ul>
-        </div>       
+
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Bienvenido ${user.username}</h1>
+                <p>Elige que hacer:</p>
+          </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Ver Imágenes</h2>
+                    <p>Mira todas las imágenes guardadas por nuestros usuarios</p>
+                    <p><a class="btn btn-primary"
+                          href="ImageList">Lista de Imágenes</a>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Registrar tus imágenes</h2>
+                    <p>Comparte tus imágenes con el resto de usuarios.</p>
+                    <p>
+                        <a class="btn btn-primary"
+                          href="imageRegister.jsp">Registrar Imagen</a>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Buscar Imágines</h2>
+                    <p>¿Te interesa buscar cierto tipo de imágenes? ¡Te podemos ayudar!</p>
+                    <p>
+                        <a class="btn btn-primary"
+                           href="imageSearch.jsp">Buscar Imágenes</a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
 

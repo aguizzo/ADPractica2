@@ -58,5 +58,7 @@
             <p>Fecha de captura: ${image.captureDate}</p>
             <p>Palabras clave: ${image.keywords}</p>
         </div>
+        <br>
+        <a class="back" href="/practica2/menu.jsp">Volver al menú</a>
     </body>
 </html>
