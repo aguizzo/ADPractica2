@@ -9,19 +9,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
+        <title>Registro de usuario</title>
         <link rel="stylesheet" href="./css/bootstrap.min.css">
         <script src="./scripts/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="./css/styles.css">
     </head>
     <body>
         <div class="login">
-            <h1>Login</h1>
-            <c:if test="${param.success == '1'}">
-                <p class="success">¡Usuario registrado con éxito!</p>
-            </c:if>
+            <h1>Registro de Usuario</h1>
             <form 
-                action="Login" 
+                action="UserRegister" 
                 method="POST"
             >
                 <div class="form-group">
@@ -39,11 +36,12 @@
                            name="password" required>
                 </div>
                 <input class="btn btn-primary"
-                       type="submit" value="Login">           
+                       type="submit" value="Registrarse">           
             </form>
             <br>
-            <a class="back" href="/practica2/userRegister.jsp">Registrarse</a>
+            <a class="back" href="/practica2">Inicio</a>
         </div>
-        
     </body>
 </html>
+
+

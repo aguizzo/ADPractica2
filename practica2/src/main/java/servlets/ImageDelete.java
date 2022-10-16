@@ -2,7 +2,6 @@ package servlets;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +21,7 @@ public class ImageDelete extends HttpServlet {
     protected void deleteImageRequest(HttpServletRequest request,HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try {
             String id = request.getParameter("ID");
             int ID = Integer.parseInt(id);
             Image im = iS.getImage(ID); 
@@ -36,8 +35,7 @@ public class ImageDelete extends HttpServlet {
                     if (deleted) {
                         boolean removed = iS.deleteImage(ID);        
                         if (removed) {
-                            out.println("<h1>Imagen eliminada con éxito</h1>");
-                            out.println("<p><a href=\"/practica2/menu.jsp\">Menú</a>");
+                            response.sendRedirect("menu.jsp?success=1");
                         }
                         else {
                             response.sendRedirect("Error?code=24");

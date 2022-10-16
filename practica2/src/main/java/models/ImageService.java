@@ -141,7 +141,8 @@ public class ImageService {
             PreparedStatement statement;
             initConnection();
 
-            query = "select * from images";
+            query = "select * from images"
+                + " order by storage_date DESC";
             statement = connection.prepareStatement(query);
             ResultSet rs = statement.executeQuery();
             
@@ -175,7 +176,8 @@ public class ImageService {
                 + " LOWER(title) LIKE ?"
                 + " AND LOWER(keywords) LIKE ?"
                 + " AND LOWER(author) LIKE ?"
-                + " AND capture_date >= ?";    
+                + " AND capture_date >= ?"
+                + " order by storage_date DESC";    
             statement = connection.prepareStatement(query);
             statement.setString(1, "%" + title + "%");
             statement.setString(2, "%" + keywords + "%");

@@ -1,61 +1,45 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="models.Image"%>
+<%@page import="models.User"%>
+<%@page import="models.ImageService"%>
 
 <c:if test="${user == null}">
     <c:redirect url="login.jsp"/> 
 </c:if>
 
+<%
+    final ImageService iS = ImageService.getInstance();
+    String id = request.getParameter("ID");
+    int ID = Integer.parseInt(id);
+    Image im = iS.getImage(ID);
+    if (im == null) {
+        response.sendRedirect("Error?code=20");
+    }
+    else {
+        User user = (User)session.getAttribute("user");
+        if (!user.getUsername().equals(im.getUploader())) {
+            response.sendRedirect("Error?code=403");
+        }
+        request.setAttribute("im", im);
+    }
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Registro de Imagen</title>
+        <title>Modificar imagen</title>
         <link rel="stylesheet" href="./css/bootstrap.min.css">
         <script src="./scripts/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="./css/styles.css">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="menu.jsp">
-                      Menú
-                  </a>
-                </li>                  
-                <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="ImageList">
-                      Lista de imágenes
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" href="imageRegister.jsp">
-                      Registrar imagen
-                  </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="imageSearch.jsp">
-                        Buscar imágenes
-                    </a>
-                </li>
-              </ul>
-              <form class="d-flex" action="Logout" method="POST">
-                <input class="btn btn-outline-success"
-                    type="submit" name="logout" value="Logout"/>
-              </form>
-            </div>
-        </div>
-        </nav>
         <div class="login">
-            <h1>Registro de Imagen</h1>
-            <c:if test="${param.success == '1'}">
-                <p class="success">¡Imagen registrada con éxito!</p>
-            </c:if>
+        <h1>Modificar Imagen</h1>
             <form 
-                action="ImageRegister" 
-                method="POST"
-                enctype="multipart/form-data"
+                action="ImageModify" 
+                method="POST" 
             >
                 <div class="form-group">
                     <label class="form-label" for="title">
@@ -63,7 +47,8 @@
                     </label>
                     <input class="form-control"
                            type="text"
-                           name="title" required>
+                           name="title"
+                           value="${im.title}" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="description">
@@ -71,7 +56,8 @@
                     </label>
                     <input class="form-control"
                            type="text"
-                           name="description" required>
+                           name="description" 
+                           value="${im.description}" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="keywords">
@@ -79,7 +65,8 @@
                     </label>
                     <input class="form-control"
                            type="text"
-                           name="keywords" required>
+                           name="keywords"
+                           value="${im.keywords}" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="author">
@@ -96,21 +83,18 @@
                     </label>
                     <input class="form-control"
                            type="date"
-                           name="captureDate" required>
+                           name="captureDate"
+                           value="${im.captureDate}"
+                           required>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="image">
-                        Selecciona una imagen:
-                    </label>
-                    <input class="form-control"
-                           type="file"
-                           name="image" required>
-                </div>
+                <input name="ID" value="${im.id}" hidden>
+                <input name="uploader" value="${im.uploader}" hidden>
                 <input class="btn btn-primary"
-                       type="submit" value="Subir imagen">
+                       type="submit" value="Modificar imagen">
             </form>
             <br>
             <a class="back" href="/practica2/menu.jsp">Volver al menú</a>
         </div>
     </body>
 </html>
+

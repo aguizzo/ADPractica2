@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +19,7 @@ public class ImageModify extends HttpServlet {
     protected void imageModifyRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {             
+        try {             
             String id = request.getParameter("ID");
             int ID = Integer.parseInt(id);
             String title = request.getParameter("title");
@@ -35,8 +34,7 @@ public class ImageModify extends HttpServlet {
                 boolean modified = iS.modifyImage(ID, title, description,
                     keywords, author, captureDate);
                 if (modified) {
-                    out.println("<h1>Imagen modficada con éxito</h1>");
-                    out.println("<p><a href=\"/practica2/menu.jsp\">Menú</a>");
+                    response.sendRedirect("ImageShow?ID=" + id + "&success=1");
                 }
                 else {
                     response.sendRedirect("Error?code=26");

@@ -1,9 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,14 +19,13 @@ public class UserRegister extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Connection connection = null;
-        try (PrintWriter out = response.getWriter()) {
+        try {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             
             boolean registered = uS.userRegister(username, password);
             if(registered) {
-                out.println("<h1>Registrado con éxito</h1>");
-                out.println("<p><a href=\"/practica2\">Inicio</a>");
+               response.sendRedirect("login.jsp?success=1");
             }
             else {
                 response.sendRedirect("Error?code=10");

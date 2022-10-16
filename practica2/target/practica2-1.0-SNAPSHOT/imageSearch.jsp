@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Registro de Imagen</title>
+        <title>Búsqueda de imágenes</title>
         <link rel="stylesheet" href="./css/bootstrap.min.css">
         <script src="./scripts/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="./css/styles.css">
@@ -30,12 +30,12 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" href="imageRegister.jsp">
+                  <a class="nav-link" href="imageRegister.jsp">
                       Registrar imagen
                   </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="imageSearch.jsp">
+                    <a class="nav-link active" href="imageSearch.jsp">
                         Buscar imágenes
                     </a>
                 </li>
@@ -48,66 +48,42 @@
         </div>
         </nav>
         <div class="login">
-            <h1>Registro de Imagen</h1>
-            <c:if test="${param.success == '1'}">
-                <p class="success">¡Imagen registrada con éxito!</p>
-            </c:if>
-            <form 
-                action="ImageRegister" 
-                method="POST"
-                enctype="multipart/form-data"
-            >
+            <h1>Búsqueda de imágenes</h1>
+            <form action="ImageSearch" method="GET">
                 <div class="form-group">
                     <label class="form-label" for="title">
-                        Título:
+                        Buscar por título
                     </label>
                     <input class="form-control"
                            type="text"
-                           name="title" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="description">
-                        Descripción:
-                    </label>
-                    <input class="form-control"
-                           type="text"
-                           name="description" required>
+                           name="title">
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="keywords">
-                        Palabras clave:
+                        Buscar por palabras clave
                     </label>
                     <input class="form-control"
                            type="text"
-                           name="keywords" required>
+                           name="keywords">
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="author">
-                        Autor:
+                        Buscar por autor
                     </label>
                     <input class="form-control"
                            type="text"
-                           name="author"
-                           value="${user.username}" required>
+                           name="author">
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="captureDate">
-                        Fecha de captura:
+                        Capturada a partir de:
                     </label>
                     <input class="form-control"
                            type="date"
-                           name="captureDate" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="image">
-                        Selecciona una imagen:
-                    </label>
-                    <input class="form-control"
-                           type="file"
-                           name="image" required>
+                           name="captureDate">
                 </div>
                 <input class="btn btn-primary"
-                       type="submit" value="Subir imagen">
+                       type="submit" value="Buscar imagen">
             </form>
             <br>
             <a class="back" href="/practica2/menu.jsp">Volver al menú</a>

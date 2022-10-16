@@ -30,7 +30,7 @@ public class ImageRegister extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute("user");
-        try (PrintWriter out = response.getWriter()) {
+        try {
           String title = request.getParameter("title");
           String description = request.getParameter("description");
           String keywords = request.getParameter("keywords");
@@ -48,9 +48,7 @@ public class ImageRegister extends HttpServlet {
                 uploader, captureDate, storageDate, fileName);
             boolean registered = iS.imageRegister(image);
             if (registered) {
-                out.println("<h1>Imagen registrada con éxito</h1>");
-                out.println("<p><a href=\"/practica2/menu.jsp\">Menú</a>");
-                out.println("<p><a href=\"/practica2/imageRegister.jsp\">Registrar otra imagen</a>");
+                response.sendRedirect("imageRegister.jsp?success=1");
             }
             else {
                 response.sendRedirect("Error?code=21");
