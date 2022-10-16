@@ -72,6 +72,7 @@ public class Error extends HttpServlet {
                 break;
             case 23:
                 errorMsg = "Error en la obtención de imágenes.";
+                break;
             case 24:
                 errorMsg = "No se ha podido borrar la imagen en "
                         + "la base de datos.";
@@ -80,7 +81,11 @@ public class Error extends HttpServlet {
                 errorMsg = "No se ha podido eliminar el archivo.";
                 break;
             case 26:
-                errorMsg = "No se ha podido modificar la imagen.";    
+                errorMsg = "No se ha podido modificar la imagen.";
+                break;
+            case 27:
+                errorMsg = "El archivo no es de tipo jpeg/jpg.";
+                break;
             case 403:
                 errorMsg = "Acceso no autorizado.";
                 break;    

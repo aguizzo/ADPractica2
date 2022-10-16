@@ -100,7 +100,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="image">
-                        Selecciona una imagen:
+                        Selecciona una imagen (tipo jpg/jpeg):
                     </label>
                     <input class="form-control"
                            type="file"

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.ServletException;
@@ -31,36 +30,41 @@ public class ImageRegister extends HttpServlet {
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute("user");
         try {
-          String title = request.getParameter("title");
-          String description = request.getParameter("description");
-          String keywords = request.getParameter("keywords");
-          String author = request.getParameter("author");
-          String uploader = user.getUsername();
-          String captureDate = request.getParameter("captureDate");
-          String storageDate = getDate();
+            String title = request.getParameter("title");
+            String description = request.getParameter("description");
+            String keywords = request.getParameter("keywords");
+            String author = request.getParameter("author");
+            String uploader = user.getUsername();
+            String captureDate = request.getParameter("captureDate");
+            String storageDate = getDate();
           
-          Part part = request.getPart("image");
-          String fileName = part.getSubmittedFileName();
-          boolean uploaded = uploadFile(part, fileName);
-          
-          if(uploaded) {
-            Image image = new Image(title, description, keywords, author,
-                uploader, captureDate, storageDate, fileName);
-            boolean registered = iS.imageRegister(image);
-            if (registered) {
-                response.sendRedirect("imageRegister.jsp?success=1");
+            Part part = request.getPart("image");
+            String contentType = part.getContentType();
+            if (contentType.equals("image/jpeg")) {
+                String fileName = part.getSubmittedFileName();
+                boolean uploaded = uploadFile(part, fileName);
+                if(uploaded) {
+                    Image image = new Image(title, description, keywords, author,
+                        uploader, captureDate, storageDate, fileName);
+                    boolean registered = iS.imageRegister(image);
+                    if (registered) {
+                        response.sendRedirect("imageRegister.jsp?success=1");
+                    }
+                    else {
+                        response.sendRedirect("Error?code=21");
+                    }
+                }
+                else {
+                    response.sendRedirect("Error?code=22");
+                }     
             }
             else {
-                response.sendRedirect("Error?code=21");
+                response.sendRedirect("Error?code=27");
             }
-          }
-          else {
-              response.sendRedirect("Error?code=22");
-          }     
-        } 
+        }
         catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect("Error?code=0");
+              e.printStackTrace();
+              response.sendRedirect("Error?code=0");
         }
     }
 
