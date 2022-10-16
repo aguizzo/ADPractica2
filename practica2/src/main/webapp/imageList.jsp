@@ -40,7 +40,7 @@
                     </a>
                 </li>
               </ul>
-              <form class="d-flex" action="Logout" method="POST"">
+              <form class="d-flex" action="Logout" method="POST">
                 <input class="btn btn-outline-success"
                     type="submit" name="logout" value="Logout"/>
               </form>
@@ -76,7 +76,7 @@
                     </a>    
                     <div>
                         <h4>
-                            Subida por ${im.uploader} en:  ${im.storageDate}
+                            Subida por <b>${im.uploader}</b> en: ${im.storageDate}
                         </h4>
                         <p>Fecha de captura: ${im.captureDate}</p>
                         <p>Palabras clave: ${im.keywords}</p>

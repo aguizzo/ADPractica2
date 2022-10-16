@@ -39,7 +39,7 @@
                     </a>
                 </li>
               </ul>
-              <form class="d-flex" action="Logout" method="POST"">
+              <form class="d-flex" action="Logout" method="POST">
                 <input class="btn btn-outline-success"
                     type="submit" name="logout" value="Logout"/>
               </form>

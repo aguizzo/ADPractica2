@@ -5,6 +5,13 @@
     <c:redirect url="login.jsp"/> 
 </c:if>
 
+<c:url var="imdel" value="imageDelete.jsp">
+    <c:param name="ID" value="${image.id}"></c:param>
+</c:url>
+<c:url var="immod" value="imageModify.jsp">
+    <c:param name="ID" value="${image.id}"></c:param>
+</c:url>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,24 +47,34 @@
                     </a>
                 </li>
               </ul>
-              <form class="d-flex" action="Logout" method="POST"">
+              <form class="d-flex" action="Logout" method="POST">
                 <input class="btn btn-outline-success"
                     type="submit" name="logout" value="Logout"/>
               </form>
             </div>
         </div>
         </nav>
-        <div>
-           <p>${image.title}</p>
-           <p>Subida por ${image.uploader} en ${image.storageDate}</p>
-            <c:if test="${user.username == image.uploader}">
-                <p>Mi imagen</p>
-            </c:if>
+        <div class="container-fluid">
+            <h1 class="display-6">${image.title}</h1>
+            <p>Subida por <b>${image.uploader}</b> en ${image.storageDate}</p>
+        
             <img src="./images/${image.fileName}" alt="error">
-            <p>Descripción: ${image.description}</p>
-            <p>Autor de la imagen: ${image.author}</p>
-            <p>Fecha de captura: ${image.captureDate}</p>
-            <p>Palabras clave: ${image.keywords}</p>
+            <p class="Imdesc">Descripción:</p>
+                <p class="Imattr">${image.description}</p>
+            <p class="Imdesc">Autor de la imagen:</p>
+                <p class="Imattr"><b>${image.author}</b></p>
+            <p class="Imdesc">Fecha de captura:</p>
+                <p class="Imattr"> ${image.captureDate}</p>
+            <p class="Imdesc">Palabras clave:</p>
+                <p class="Imattr">${image.keywords}</p>
+            <c:if test="${user.username == image.uploader}">
+                <a class="btn btn-primary" href="${imdel}">
+                    Eliminar Imagen
+                </a>
+                <a class="btn btn-primary" href="${immod}">
+                    Modificar Imagen
+                </a>
+            </c:if>
         </div>
         <br>
         <a class="back" href="/practica2/menu.jsp">Volver al menú</a>
