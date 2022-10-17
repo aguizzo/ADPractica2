@@ -79,6 +79,7 @@
                             Subida por <b>${im.uploader}</b> en: ${im.storageDate}
                         </h4>
                         <p>Fecha de captura: ${im.captureDate}</p>
+                        <p>Autor: ${im.author}</p>
                         <p>Palabras clave: ${im.keywords}</p>
                         <c:if test="${user.username == im.uploader}">
                             <a class="btn btn-primary" href="${imdel}">
